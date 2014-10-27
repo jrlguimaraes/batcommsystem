@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="/template.xhtml">
+	<ui:define name="cabecalho">
+	
+	</ui:define>
+
+	<ui:define name="menu">
+		
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+		<p:growl autoUpdate="true"/>
+			<p:panel id="panelLogin" header="LOGIN" footer="Faça o Login!">
+				<h:panelGrid columns="2" cellpadding="5">
+
+					<h:outputText value="Login: " />
+					<p:inputText id="login" value="#{loginMB.login}" />
+
+					<h:outputText value="Senha: " />
+					<p:password id="password" value="#{loginMB.password}" />
+					
+					<p:commandButton value="Login" action="#{loginMB.makeLoginCheck}"/>
+					<p:commandButton value="New User"/>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		
+	
+		<p:media value="/resources/batman2.mp3" width="200" height="20" player="windows">
+                <f:param name="autoPlay" value="false" />
+        </p:media>
+	</ui:define>
+	
+
+</ui:decorate>
+
+</html>

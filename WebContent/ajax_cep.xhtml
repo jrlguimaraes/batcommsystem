@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<ui:decorate template="/template.xhtml">
+	<ui:define name="conteudo">
+	
+	<h:form>
+	<p:panelGrid columns="2">
+	
+	<p:outputLabel value="CEPsss: "/>
+	<p:inputMask id="cepProcess" value="#{enderecoMB.endereco.logradouro.cep}" mask="99999-999"/>
+
+	</p:panelGrid>
+	<p:commandButton value="OK!" actionListener="#{enderecoMB.pesquisaAjaxCEP}" update="cepPanel">
+		<f:ajax render="cepPanel" />
+	</p:commandButton>
+	
+	<p:panelGrid columns="1" id="cepPanel">
+			<h:outputText value="Logradouro: #{enderecoMB.endereco.logradouro.logradouro}" />
+			<h:outputText value="Bairro: #{enderecoMB.endereco.logradouro.bairro}" />
+			<h:outputText value="Cidade: #{enderecoMB.endereco.logradouro.cidade}" />
+			<h:outputText value="Estado: #{enderecoMB.endereco.logradouro.uf}" />
+			<h:outputText value="CEP: #{enderecoMB.endereco.logradouro.cep}" />
+			<h:outputText value="IBGE #: #{enderecoMB.endereco.logradouro.ibge}" />
+		</p:panelGrid>
+	
+	</h:form>
+	
+	
+
+	</ui:define>
+</ui:decorate>
+</html>

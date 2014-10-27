@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<p:dialog header="Add New Message" widgetVar="dialogWidget"
+	showEffect="explode" hideEffect="bounce" height="420" width="400"
+	modal="true" appendTo="@(body)">
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Message: " />
+			<h:inputTextarea value="#{intraCommMB.intraMessage.message}"
+				required="true" label="Message">
+				<f:validateLength minimum="4" />
+			</h:inputTextarea>
+
+			<h:outputText value="Date/Time" />
+			<p:calendar value="#{intraCommMB.intraMessage.date}" 
+				required="true" label="DateOfMessage" pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3" locale="pt"/> 
+
+			<p:commandButton value="Save"
+				action="#{intraCommMB.addIntraMessage()}" update=":formCI"
+				onclick="dialogWidget.hide()" />
+			<p:commandButton value="Cancel" action="#{intraCommMB.resetCI()}"
+				onclick="dialogWidget.hide()" />
+		</h:panelGrid>
+	</h:form>
+</p:dialog>
+</html>

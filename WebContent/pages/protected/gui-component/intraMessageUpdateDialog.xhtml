@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<p:dialog widgetVar="intraMessageUpdateDialogWidget"
+	id="intraMessageUpdateDialogId" height="420" width="400" modal="true"
+	closable="true" draggable="false" resizable="false" appendTo="@(body)">
+
+	<h:panelGrid columns="2">
+		<h:outputText value="User Name: " />
+		<h:outputText value="#{intraCommMB.personMB.person.name}" />
+
+		<h:outputText value="Login: " />
+		<h:outputText
+			value="#{intraCommMB.personMB.userAccountMB.userAccount.login}" />
+
+		<h:outputText value="Account Type: " />
+		<h:outputText value="Administrator"
+			rendered="#{intraCommMB.personMB.userAccountMB.admin}" />
+		<h:outputText value="Regular User"
+			rendered="#{intraCommMB.personMB.userAccountMB.defaultUser}" />
+	</h:panelGrid>
+
+	<h:form id="intraMessageUpdateDialogForm" prependId="false">
+		<h:panelGrid columns="2">
+			<h:outputText value="Message: " />
+			<h:inputTextarea value="#{intraCommMB.intraMessage.message}"
+				required="true" label="message" />
+
+			<h:outputText value="Date/Time: " />
+			<p:calendar value="#{intraCommMB.intraMessage.date}" id="date"
+				required="true" label="DateOfMessage" pattern="dd/MM/yyyy HH:mm"
+				locale="pt" timeZone="GMT-3" />
+
+			<p:commandButton value="Update" icon="ui-icon-plus"
+				action="#{intraCommMB.updateCI()}" update=":formCI:tabelaCI" />
+
+			<p:commandButton value="Cancel" icon="ui-icon-cancel"
+				actionListener="#{intraCommMB.resetCI()}"
+				onclick="intraMessageUpdateDialogWidget.hide();" type="button" />
+		</h:panelGrid>
+	</h:form>
+
+</p:dialog>
+</html>

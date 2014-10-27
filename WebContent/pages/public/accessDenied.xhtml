@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="/template.xhtml">
+	<ui:insert name="cabecalho">
+	
+	</ui:insert>
+
+	<ui:define name="menu">
+	
+		
+	</ui:define>
+
+	<ui:define name="conteudo">
+		
+		<p:panel header="ACCESS DENIED" footer="Batman disse que sente muito, mas você não pode vir aqui!!!! ">
+			<h:outputLabel value="Desculpe, #{accessDeniedMB.personMB.person.name}! " rendered="#{accessDeniedMB.personMB.userAccountMB.logged}" />
+			<h:outputText value="VOCÊ NÃO TEM PRIVILÉGIOS PARA ESTE ACESSO!" />
+		</p:panel>
+		
+		<br/>
+		
+		<h:graphicImage url="/resources/joker.png" width="250" height="250"  />
+		
+		<br/>
+		
+		<p:spacer height="50"/>
+		
+		<h:outputLabel value="HA HA HA HA HA HA HA HA HA HA HA HA HA HA HA HA HA HA HA HA  " />
+		
+		<p:spacer height="50"/>
+
+		<p:media value="/resources/joker_laugh.mp3" width="200" height="20" player="windows">
+                <f:param name="autoPlay" value="false" />
+        </p:media>
+        
+	</ui:define>
+	
+
+</ui:decorate>
+
+</html>

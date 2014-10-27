@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="/template.xhtml">
+
+	<ui:define name="cabecalho">
+		<h:outputText value="Welcome, #{intraCommMB.personMB.person.name}" />
+		<h:form>
+			<h:commandLink
+				action="#{intraCommMB.personMB.userAccountMB.logout()}"
+				value="Logout" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="menu">
+		<p:submenu label="Menu">
+			<p:menuitem value="Usuarios" icon="ui-icon-contact" />
+			<p:menuitem value="Comunicações Internas" icon="ui-icon-contact" />
+		</p:submenu>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="formCI">
+
+			<p:growl autoUpdate="true" />
+
+			<p:dataTable id="tabelaCI" value="#{intraCommMB.intraComms}" var="ci"
+				emptyMessage="No messages found!" paginator="true" rows="5"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{ci.id}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Messages</f:facet>
+					<h:outputText value="#{ci.message}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Date/Time</f:facet>
+					<h:outputText value="#{ci.date}">
+						<f:convertDateTime locale="pt-BR" pattern="dd/MM/yyyy HH:mm"
+							timeZone="GMT-3" />
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Actions</f:facet>
+
+					<p:commandButton icon="ui-icon-pencil"
+						update=":intraMessageUpdateDialogForm"
+						onclick="intraMessageUpdateDialogWidget.show();">
+						<f:setPropertyActionListener target="#{intraCommMB.intraMessage}"
+							value="#{ci}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-minus">
+
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+			<p:commandButton value="New Message" icon="ui-icon-plus"
+				onclick="PF('dialogWidget').show();" />
+
+			<p:poll interval="3" update="tabelaCI" />
+			<p:poll interval="1000" listener="#{intraCommMB.updateTime}"
+				update="dataHora" />
+			<h:outputText value="#{intraCommMB.myTime}" id="dataHora">
+				<f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+			</h:outputText>
+		</h:form>
+
+		<ui:include
+			src="/pages/protected/gui-component/intraMessageUpdateDialog.xhtml" />
+		<ui:include
+			src="/pages/protected/gui-component/intraMessageCreateDialog.xhtml" />
+
+		<p:media value="/resources/batman2.mp3" width="200" height="20"
+			player="windows">
+			<f:param name="autoPlay" value="false" />
+		</p:media>
+
+	</ui:define>
+</ui:decorate>
+</html>

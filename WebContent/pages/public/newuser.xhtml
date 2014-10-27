@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<ui:decorate template="/template.xhtml">
+	<ui:define name="cabecalho"></ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="addnewuser">
+			<p:growl id="growl" sticky="true" showDetail="true" />
+
+			<p:wizard flowListener="#{newUserMB.onFlowProcess}">
+
+				<p:tab id="personalTab" title="Personal">
+					<p:panel header="Personal Details">
+						<ui:include
+							src="/pages/public/gui-component/newuser/newperson.xhtml" />
+					</p:panel>
+				</p:tab>
+				
+				<p:tab id="useraccountTab" title="User Account">
+					<p:panel header="User Account">
+						<ui:include
+							src="/pages/public/gui-component/newuser/newuseraccount.xhtml" />
+					</p:panel>
+				</p:tab>
+				
+				<p:tab id="addressTab" title="Address">
+					<p:panel header="Address Details">
+						<ui:include
+							src="/pages/public/gui-component/newuser/newaddress.xhtml" />
+					</p:panel>
+
+					<p:commandButton value="Save" actionListener="#{newUserMB.save}"
+						update="growl" process="@this" />
+					<p:commandButton value="Reset" />
+				</p:tab>
+			</p:wizard>
+
+		</h:form>
+
+
+
+	</ui:define>
+
+</ui:decorate>
+
+
+</html>
